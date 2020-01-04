@@ -444,7 +444,7 @@ func createPatch(deployment *appsv1.Deployment, sidecarConfig *Config, available
     var patch []patchOperation
 
     if !reflect.DeepEqual(deployment, &appsv1.Deployment{}) {
-        patch = append(patch, addContainer(deployment.Spec.Template.Spec.Containers, sidecarConfig.Containers, "/spec/template/spec/containers")...)
+        patch = append(patch, ntainer(deployment.Spec.Template.Spec.Containers, sidecarConfig.Containers, "/spec/template/spec/containers")...)
         patch = append(patch, addVolume(deployment.Spec.Template.Spec.Volumes, sidecarConfig.Volumes, "/spec/template/spec/volumes")...)
         patch = append(patch, updateTemplateLables(templateLables, labels)...)
     }

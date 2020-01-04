@@ -1,0 +1,10 @@
+{
+  "kind": "Namespace",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "default",
+    "labels": {
+      "kubernetes-sidecar-injector": "enabled"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+#intellij
+.idea
+*.iml
+*.ipr
+*.iws
+kubernetes-sidecar-injector
+generated-*.yaml
+
+Gopkg.lock
+/vendor/
