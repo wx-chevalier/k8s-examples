@@ -1,0 +1,34 @@
+image:
+  repository: gitlab/gitlab-ce
+
+externalUrl: http://gitlab.yourdomain.com/
+
+ingress:
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-cluster"
+  enabled: true
+  tls:
+    - secretName: gitlab-tls
+      hosts:
+        - gitlab.yourdomain.com
+  hosts:
+    - gitlab.yourdomain.com
+
+persistence:
+  gitlabEtc:
+    enabled: true
+    existingClaim: gitlab-etc
+  gitlabData:
+    enabled: true
+    existingClaim: gitlab-data
+
+postgresql:
+  persistence:
+    enabled: true
+    existingClaim: gitlab-postgresql
+
+redis:
+  persistence:
+    enabled: false

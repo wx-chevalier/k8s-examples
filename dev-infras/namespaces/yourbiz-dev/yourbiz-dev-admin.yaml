@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: yourbiz-dev-admin
+  namespace: yourbiz-dev
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: yourbiz-dev-admin
+  namespace: yourbiz-dev
+rules:
+  - apiGroups: ["*"]
+    resources: ["*"]
+    verbs: ["*"]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: yourbiz-dev-admin
+  namespace: yourbiz-dev
+subjects:
+  - kind: ServiceAccount
+    name: yourbiz-dev-admin
+    namespace: yourbiz-dev
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: yourbiz-dev-admin

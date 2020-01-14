@@ -1,0 +1,19 @@
+apiVersion: ceph.rook.io/v1
+kind: CephCluster
+metadata:
+  name: rook-ceph
+  namespace: rook-ceph
+spec:
+  cephVersion:
+    image: ceph/ceph:v14.2.5
+    allowUnsupported: true
+  dataDirHostPath: /opt/disks/vdb/rook-ceph
+  mon:
+    count: 3
+  dashboard:
+    enabled: true
+  storage:
+    useAllNodes: true
+    useAllDevices: false
+    directories:
+      - path: /opt/disks/vdb/rook-ceph

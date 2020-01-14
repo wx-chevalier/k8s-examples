@@ -1,0 +1,31 @@
+cluster_name: yourbiz
+
+nodes:
+  - address: 101.133.173.103
+    internal_address: 172.19.130.219
+    user: root
+    role: [controlplane, worker, etcd]
+    hostname_override: yourbiz-master
+  - address: 172.19.130.217
+    internal_address: 172.19.130.217
+    user: root
+    role: [controlplane, worker, etcd]
+    hostname_override: yourbiz-slave000
+  - address: 172.19.130.218
+    internal_address: 172.19.130.218
+    user: root
+    role: [controlplane, worker, etcd]
+    hostname_override: yourbiz-slave001
+
+services:
+  etcd:
+    snapshot: true
+    creation: 6h
+    retention: 24h
+
+# Required for external TLS termination with
+# ingress-nginx v0.22+
+ingress:
+  provider: nginx
+  options:
+    use-forwarded-headers: "true"

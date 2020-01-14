@@ -1,0 +1,30 @@
+nexusProxy:
+  env:
+    nexusHttpHost: nexus.yourdomain.com
+
+securityContext:
+  fsGroup: 2000
+
+ingress:
+  enabled: true
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-cluster"
+  tls:
+    enabled: true
+    secretName: sonatype-nexus
+
+# https://github.com/sonatype/docker-nexus/issues/31#issuecomment-514439679
+deployment:
+  initContainers:
+    - name: volume-mount
+      image: busybox
+      command: ["sh", "-c", "chown -R 200:200 /nexus-data"]
+      volumeMounts:
+        - name: sonatype-nexus-data
+          mountPath: /nexus-data
+
+persistence:
+  enabled: true
+  existingClaim: sonatype-nexus

@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: gitlab-data
+  namespace: yourbiz-infra
+spec:
+  storageClassName: ""
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  hostPath:
+    path: /opt/disks/vdb/gitlab-pvs/pv-gitlab-data/
+    type: ""
+  persistentVolumeReclaimPolicy: Retain
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: yourdomain.com/bare-metal-storage-name
+              operator: In
+              values:
+                - yourbiz-master
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: gitlab-data
+  namespace: yourbiz-infra
+spec:
+  storageClassName: ""
+  volumeName: gitlab-data
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+---
+
