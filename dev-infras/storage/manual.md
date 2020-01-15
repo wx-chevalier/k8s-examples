@@ -62,4 +62,4 @@ spec:
       storage: 50Gi
 ```
 
-这样，在 Deployment 中需要使用到 PVC 的地方可以直接饮用该 PVC。
+这样，在 Deployment 中需要使用到 PVC 的地方可以直接引用该 PVC。
