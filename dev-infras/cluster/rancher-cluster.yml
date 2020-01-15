@@ -1,7 +1,7 @@
 cluster_name: yourbiz
 
 nodes:
-  - address: 101.133.173.103
+  - address: youadress
     internal_address: 172.19.130.219
     user: root
     role: [controlplane, worker, etcd]

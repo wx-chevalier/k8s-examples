@@ -1,13 +1,6 @@
 # 使用 rke 安装 Kubernetes 集群
 
-依次在每台机器上安装 docker，保证每个节点都能通过 `rancher-cluster.yml` 中的 `address` 和 `internal_address` 访问彼此的
-`6443` 端口。
-
-然后执行 `rke up --config ./rancher-cluster.yml`
-
-详细安装过程见 [How to Install Rancher on a High-availability Kubernetes Cluster](https://rancher.com/docs/rancher/v2.x/en/installation/ha/).
-
-最终会生成两个文件：
+依次在每台机器上安装 docker，保证每个节点都能通过 `rancher-cluster.yml` 中的 `address` 和 `internal_address` 访问彼此的 `6443` 端口,然后执行 `rke up --config ./rancher-cluster.yml`。详细安装过程见 [How to Install Rancher on a High-availability Kubernetes Cluster](https://rancher.com/docs/rancher/v2.x/en/installation/ha/)。最终会生成两个文件：
 
 - `kube_config_rancher-cluster.yml`: [Kubeconfig file](https://rancher.com/docs/rke/latest/en/kubeconfig/)
 - `rancher-cluster.rkestate`: [Kubernetes Cluster State file](https://rancher.com/docs/rke/latest/en/installation/#kubernetes-cluster-state)
@@ -22,21 +15,19 @@
 
 ## 添加集群配置
 
-集群 cert 的 base64 值存放在 `kube_config_rancher-cluster.yml` 的 `clusters > cluster > certificate-authority-data` 下，
-解码生成 cert 文件（[base64 解码](#ref-base64-decoding)）。
+集群 cert 的 base64 值存放在 `kube_config_rancher-cluster.yml` 的 `clusters > cluster > certificate-authority-data` 下，解码生成 cert 文件（[base64 解码](#ref-base64-decoding)）。
 
 添加集群配置：
 
 ```sh
-kubectl config set-cluster yourbiz --server=https://101.133.173.103:6443 --certificate-authority=/path/to/cluster.crt
+kubectl config set-cluster yourbiz --server=https://youadress:6443 --certificate-authority=/path/to/cluster.crt
 ```
 
 可以通过 `kubectl config view` 查看是否配置成功。
 
 ## 添加 yourbiz 集群管理员账户
 
-`kube_config_rancher-cluster.yml` 中 `users > user` 下 `client-certificate-data` 和 `client-key-data` 分别存放了用户
-的 cert 和 key 的 base64 值，解码生成对应的文件（[base64 解码](#ref-base64-decoding)）。
+`kube_config_rancher-cluster.yml` 中 `users > user` 下 `client-certificate-data` 和 `client-key-data` 分别存放了用户的 cert 和 key 的 base64 值，解码生成对应的文件（[base64 解码](#ref-base64-decoding)）。
 
 添加账户配置，并添加一个 context，使用该账户作为该 context 的账户：
 
@@ -61,11 +52,11 @@ kubectl get nodes
 
 ## 创建并使用其它账户
 
-https://kubernetes.io/docs/reference/access-authn-authz/authorization/
+> https://kubernetes.io/docs/reference/access-authn-authz/authorization/
 
 以创建一个新的命名空间，并创建拥有该命名空间下所有权限的账户为例：
 
-创建命名空间，`kubectl apply -f yourbiz-dev-ns.yaml`
+- 创建命名空间，`kubectl apply -f yourbiz-dev-ns.yaml`
 
 ```yaml
 apiVersion: v1
@@ -74,7 +65,7 @@ metadata:
   name: yourbiz-dev
 ```
 
-创建管理账户，`kubectl apply -f yourbiz-dev-admin.yaml`
+- 创建管理账户，`kubectl apply -f yourbiz-dev-admin.yaml`
 
 ```yaml
 apiVersion: v1

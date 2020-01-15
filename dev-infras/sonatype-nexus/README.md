@@ -11,9 +11,9 @@ helm upgrade --namespace yourbiz-infra sonatype-nexus -f values.yaml stable/sona
 
 用户
 
-| 用户名                 | 密码                                   |
-| ---------------------- | -------------------------------------- |
-| `admin`                | `339BEF64-7D38-4EAA-A571-C34CF75450E6` |
-| `yourbiz-snapshot-pub` | `yourbiz-snapshot-pub`                 |
-| `yourbiz-release-pub`  | `yourbiz-release-pub`                  |
-| `yourbiz-read`         | `yourbiz-read`                         |
+| 用户名                 | 密码                   |
+| ---------------------- | ---------------------- |
+| `admin`                | `YOUR-ADMIN-PASSWORD`  |
+| `yourbiz-snapshot-pub` | `yourbiz-snapshot-pub` |
+| `yourbiz-release-pub`  | `yourbiz-release-pub`  |
+| `yourbiz-read`         | `yourbiz-read`         |
