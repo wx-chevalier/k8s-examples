@@ -1,0 +1,78 @@
+{{- $fullName := include "yourbiz-be.fullname" . -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{- include "yourbiz-be.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "yourbiz-be.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "yourbiz-be.selectorLabels" . | nindent 8 }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "yourbiz-be.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: {{ .Values.biz.cmd }}
+          ports:
+            - name: http
+              # see secret.yaml server.port
+              containerPort: {{ .Values.biz.serverPort }}
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            {{- if .Values.biz.configMap.enabled }}
+            - name: app-conf
+              mountPath: "/etc/yourbiz"
+              readOnly: true
+            {{- end }}
+            - name: yourbiz-local-file-storage
+              mountPath: {{ .Values.localFileStore.savePath }}
+          startupProbe:
+            httpGet:
+              path: /swagger-resources
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
+      volumes:
+        {{- if .Values.biz.configMap.enabled }}
+        - name: app-conf
+          configMap:
+            name: {{ $fullName }}
+        {{- end }}
+        - name: yourbiz-local-file-storage
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.existingClaim | default $fullName }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}      
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

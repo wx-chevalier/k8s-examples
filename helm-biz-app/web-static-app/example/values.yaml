@@ -1,0 +1,35 @@
+sharedVolumes:
+  - name: shared-data
+    emptyDir: {}
+
+initContainers:
+  - name: init
+    image: debian
+    volumeMounts:
+      - name: shared-data
+        mountPath: /pod-data
+    command: ["/bin/sh"]
+    args:
+      - "-c"
+      - >
+          date >> /pod-data/index.html;
+          echo Hello world from init container >> /pod-data/index.html;
+
+sharedVolumeMounts:
+  - name: shared-data
+    mountPath: /srv
+
+ingress:
+  enabled: true
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-staging-cluster"
+  hosts:
+    - host: echo1.test.yourdomain.com
+      paths:
+        - /
+  tls:
+    - secretName: echo1.test.yourdomain.com
+      hosts:
+        - echo1.test.yourdomain.com

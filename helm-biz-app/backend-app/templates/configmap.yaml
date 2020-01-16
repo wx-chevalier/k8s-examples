@@ -1,0 +1,12 @@
+{{- if .Values.biz.configMap.enabled -}}
+{{- $fullName := include "yourbiz-be.fullname" . -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{- include "yourbiz-be.labels" . | nindent 4 }}
+data:
+  {{ .Values.biz.configMap.name }}: |-
+    {{ .Values.biz.configMap.content }}
+{{- end }}
