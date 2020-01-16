@@ -21,7 +21,32 @@ biz:
     name: config.xml
     content: |-
       key: value
-    
+
+persistence:
+  enabled: false
+  # existingClaim:
+  # annotations:
+  # accessMode:
+  # size:
+  # storageClass:
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths: []
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
