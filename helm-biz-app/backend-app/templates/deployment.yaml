@@ -43,8 +43,10 @@ spec:
               mountPath: {{ .Values.biz.configMap.mountPath | default "/etc/{{ $fullName }}" }}
               readOnly: true
             {{- end }}
+            {{- if .Values.biz.localFileStore.enabled }}
             - name: yourbiz-local-file-storage
-              mountPath: {{ .Values.localFileStore.savePath }}
+              mountPath: {{ .Values.biz.localFileStore.savePath }}
+            {{- end }}
           startupProbe:
             httpGet:
               path: /swagger-resources
