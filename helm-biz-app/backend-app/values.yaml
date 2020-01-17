@@ -8,6 +8,7 @@ image:
 imagePullSecrets: []
 
 biz:
+  # cmd: npm start
   serverPort: 7001
   serverTimezone: Asia/Shanghai
   localFileStore:
