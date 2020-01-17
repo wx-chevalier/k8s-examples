@@ -40,7 +40,7 @@ spec:
           volumeMounts:
             {{- if .Values.biz.configMap.enabled }}
             - name: app-conf
-              mountPath: "/etc/yourbiz"
+              mountPath: {{ .Values.biz.configMap.mountPath | default "/etc/{{ $fullName }}" }}
               readOnly: true
             {{- end }}
             - name: yourbiz-local-file-storage
