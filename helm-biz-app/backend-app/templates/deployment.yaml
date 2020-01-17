@@ -29,7 +29,9 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.biz.cmd }}
           command: {{ .Values.biz.cmd }}
+          {{- end }}
           ports:
             - name: http
               # see secret.yaml server.port
