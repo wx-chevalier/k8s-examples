@@ -19,6 +19,7 @@ biz:
   configMap:
     enabled: true
     name: config.xml
+    mountPath: /etc/yourbiz
     content: |-
       key: value
 
