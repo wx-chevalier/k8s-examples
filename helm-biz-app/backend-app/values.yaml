@@ -4,11 +4,11 @@ replicaCount: 1
 
 image:
   repository: registry.yourdomain.com/yourbiz/yourbiz-api
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 imagePullSecrets: []
 
 biz:
-  # cmd: npm start
+  # cmd: ["npm start"]
   serverPort: 7001
   serverTimezone: Asia/Shanghai
   localFileStore:
