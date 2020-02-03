@@ -64,7 +64,7 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["java"]
-          args: ["-Duser.timezone={{ .Values.serverTimezone }}", "-jar", {{ .Values.jarFile }}, "--spring.config.location={{ .Values.configPath }}/config.yaml"]
+          args: ["-Duser.timezone={{ .Values.serverTimezone }}", "-jar", {{ .Values.jarFile }}, "--spring.config.location={{ .Values.configMap.mountPath }}/application.yaml"]
           ports:
             - name: http
               # see secret.yaml server.port
@@ -74,8 +74,13 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: app-conf
-              mountPath: {{ .Values.configPath }}
+              mountPath: {{ .Values.configMap.mountPath }}
               readOnly: true
+            {{- if .Values.configMap.externalEnabled }}
+            - name: app-external-conf
+              mountPath: {{ .Values.configMap.mountPath }}
+              readOnly: true
+            {{- end }}
             - name: yourbiz-local-file-storage
               mountPath: {{ .Values.localFileStore.savePath }}
           env:

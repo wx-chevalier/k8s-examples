@@ -12,7 +12,13 @@ fullnameOverride: ""
 serverPort: 80
 serverTimezone: Asia/Shanghai
 jarFile: biz-api.jar
-configPath: /etc/biz
+## 额外的 ConfigMap
+configMap:
+  mountPath: /etc/yourbiz
+  externalEnabled: true
+  name: config.xml
+  content: |-
+    key: value
 localFileStore:
   enabled: true
   savePath: /yourbiz/files
@@ -82,7 +88,7 @@ externalRabbitMq: {}
 ## 外部 mqtt
 externalMqtt:
   brokerPort: 1883
-
+    
 ## @end yourbiz be 配置
 
 persistence:
