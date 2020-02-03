@@ -22,8 +22,10 @@
 {{- end }}
 
 
-{{- if and .Values.mysql.enabled (eq .Values.mysql.service.type "NodePort") }}
+{{- if .Values.mysql.enabled }}
+  {{- if (eq .Values.mysql.service.type "NodePort") }}
 - 可以通过 NodePort {{ .Values.mysql.service.nodePort }} 访问 MySQL 
+  {{- end }}
 {{- end }}
 
 {{- if .Values.rabbitmq.enabled  }}
