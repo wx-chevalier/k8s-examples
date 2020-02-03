@@ -100,16 +100,6 @@ data:
         max-bytes-in-message: {{ .Values.mqttMaxBytesInMessage }}
         reconnect: {{ .Values.mqttReconnect }}
 
-      msg:
-        device-code-black-list-pattern: {{ .Values.deviceCodeBlackListPattern }}
-        device-code-white-list-pattern: {{ .Values.deviceCodeWhiteListPattern }}
-
-      gexin:
-        app-id: {{ .Values.gexin.appId }}
-        app-key: ${GEXIN_APP_KEY}
-        app-secret: ${GEXIN_APP_SECRET}
-        master-secret: ${GEXIN_MASTER_SECRET}
-
       wechat:
         app-id: {{ .Values.wechat.appId }}
         token: ${WECHAT_TOKEN}

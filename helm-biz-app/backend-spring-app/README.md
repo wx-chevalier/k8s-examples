@@ -26,10 +26,6 @@
 | `wechat.appId`                   |                       |                                           | true | `configmap`            |
 | `wechat.token`                   |                       |                                           | true | `secret`               |
 | `wechat.appSecret`               |                       |                                           | true | `secret`               |
-| `gexin.appId`                    |                       |                                           | true | `configmap`            |
-| `gexin.appKey`                   |                       |                                           | true | `secret`               |
-| `gexin.appSecret`                |                       |                                           | true | `secret`               |
-| `gexin.masterSecret`             |                       |                                           | true | `secret`               |
 | `dingTalk.accessToken`           |                       |                                           |      | `secret`               |
 | `msg.deviceCodeBlackListPattern` |                       |                                           |      | `configmap`            |
 | `msg.deviceCodeWhiteListPattern` |                       |                                           |      | `configmap`            |
@@ -122,7 +118,7 @@
 ⚠️ 注意：使用了 `management.load_definition` 加载定义之后，会覆盖掉 `rabbitmq.rabbitmq.username` 定义的用户，
 暂时解决方案自行同步所有用户定义到 `load_definition.json` 中。
 
-```conf
+```yaml
 rabbitmq:
   enabled: true
   mqtt:

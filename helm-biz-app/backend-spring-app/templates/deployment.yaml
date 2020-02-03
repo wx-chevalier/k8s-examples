@@ -64,7 +64,7 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["java"]
-          args: ["-Duser.timezone={{ .Values.serverTimezone }}", "-jar", "yourbiz-api.jar", "--spring.config.location=/etc/yourbiz/config.yaml"]
+          args: ["-Duser.timezone={{ .Values.serverTimezone }}", "-jar", {{ .Values.jarFile }}, "--spring.config.location={{ .Values.configPath }}/config.yaml"]
           ports:
             - name: http
               # see secret.yaml server.port
@@ -74,7 +74,7 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: app-conf
-              mountPath: "/etc/yourbiz"
+              mountPath: {{ .Values.configPath }}
               readOnly: true
             - name: yourbiz-local-file-storage
               mountPath: {{ .Values.localFileStore.savePath }}
@@ -142,26 +142,6 @@ spec:
                 secretKeyRef:
                   name: {{ $fullName }}
                   key: wechat-app-secret
-            - name: GEXIN_APP_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: {{ $fullName }}
-                  key: gexin-app-key
-            - name: GEXIN_APP_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: {{ $fullName }}
-                  key: gexin-app-secret
-            - name: GEXIN_MASTER_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: {{ $fullName }}
-                  key: gexin-master-secret
-            - name: DING_TALK_ACCESS_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: {{ $fullName }}
-                  key: gexin-master-secret
           startupProbe:
             httpGet:
               path: /swagger-resources
