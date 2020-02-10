@@ -30,19 +30,13 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Chart.CaddyVersion }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.version }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 2015
+              containerPort: {{ .Values.image.port }}
               protocol: TCP
           volumeMounts:
-            {{- if .Values.customCaddyfile.enabled }}
-            - name: caddyfile
-              mountPath: "/etc/Caddyfile"
-              subPath: "Caddyfile"
-              readOnly: true
-            {{- end }}
             {{- toYaml .Values.sharedVolumeMounts | nindent 12 }}
           livenessProbe:
             httpGet:
@@ -54,12 +48,6 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}      
-      {{- if .Values.customCaddyfile.enabled }}
-      volumes:
-        - name: caddyfile
-          configMap:
-            name: {{ $fullName }}
-      {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

@@ -1,0 +1,7 @@
+apiVersion: v2
+name: yourbiz-static
+description: A Helm chart for Docker Apps
+
+type: application
+
+version: 0.1.0
