@@ -86,20 +86,6 @@ data:
         insert-executor-type: FIXED
         insert-fixed-thread-pool-size: 10
 
-      mqtt:
-        {{- if and .Values.rabbitmq.enabled .Values.rabbitmq.mqtt.enabled }}
-        username: {{ .Values.rabbitmq.mqtt.username }}
-        broker-host: {{ $fullName }}-rabbitmq
-        broker-port: {{ .Values.rabbitmq.mqtt.port }}
-        {{- else }}
-        username: {{ .Values.externalMqtt.username }}
-        broker-host: {{ .Values.externalMqtt.brokerHost }}
-        broker-port: {{ .Values.externalMqtt.brokerPort }}
-        {{- end }}
-        password: ${MQTT_PASSWORD}
-        max-bytes-in-message: {{ .Values.mqttMaxBytesInMessage }}
-        reconnect: {{ .Values.mqttReconnect }}
-
       wechat:
         app-id: {{ .Values.wechat.appId }}
         token: ${WECHAT_TOKEN}

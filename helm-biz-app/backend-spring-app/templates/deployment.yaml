@@ -81,11 +81,6 @@ spec:
                 secretKeyRef:
                   name: {{ $fullName }}
                   key: rabbitmq-password
-            - name: MQTT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ $fullName }}
-                  key: mqtt-password
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
