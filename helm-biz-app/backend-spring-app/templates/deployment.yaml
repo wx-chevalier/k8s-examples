@@ -76,11 +76,13 @@ spec:
                   name: {{ $fullName }}
                   {{- end }}
                   key: mysql-password
+            {{- if .Values.rabbitmq.enabled }}
             - name: RABBITMQ_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ $fullName }}
                   key: rabbitmq-password
+            {{- end }}
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
