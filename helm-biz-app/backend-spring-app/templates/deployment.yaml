@@ -39,23 +39,6 @@ spec:
                   {{- end }}
                   key: mysql-password
         {{- end }}
-        {{- if .Values.rabbitmq.enabled }}
-        - name: check-rabbitmq-ready
-          image: {{ .Values.rabbitmq.image.registry | default "docker.io" }}/{{ .Values.rabbitmq.image.repository | default "bitnami/rabbitmq" }}:{{ .Values.rabbitmq.image.tag | default "3.8.2-debian-9-r31" }}
-          command: ['sh', '-c',
-          'echo waiting for rabbitmq; until curl --max-time 2 "http://{{ .Values.rabbitmq.rabbitmq.username }}:$RABBITMQ_PASSWORD@{{ $fullName }}-rabbitmq:15672/api/healthchecks/node" | grep "{\"status\":\"ok\"}"; do
-          echo waiting for rabbitmq; sleep 2; done;']
-          env:
-            - name: RABBITMQ_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  {{- if .Values.rabbitmq.enabled }}
-                  name: {{ $fullName }}-rabbitmq
-                  {{- else }}
-                  name: {{ $fullName }}
-                  {{- end }}
-                  key: rabbitmq-password
-        {{- end }}
 
       containers:
         - name: {{ .Chart.Name }}
@@ -96,11 +79,7 @@ spec:
             - name: RABBITMQ_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  {{- if .Values.rabbitmq.enabled }}
-                  name: {{ $fullName }}-rabbitmq
-                  {{- else }}
                   name: {{ $fullName }}
-                  {{- end }}
                   key: rabbitmq-password
             - name: MQTT_PASSWORD
               valueFrom:

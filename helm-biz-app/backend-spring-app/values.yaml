@@ -83,7 +83,7 @@ rabbitmq:
     runAsUser: 0
     fsGroup: 2000
 
-externalRabbitMq: {}
+rabbitmq: {}
 
 ## 外部 mqtt
 externalMqtt:

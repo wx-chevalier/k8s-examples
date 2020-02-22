@@ -25,7 +25,3 @@ dependencies:
     version: 1.6.2
     condition: mysql.enabled
     repository: https://kubernetes-charts.storage.googleapis.com/
-  - name: rabbitmq
-    version: 6.16.1
-    condition: rabbitmq.enabled
-    repository: https://kubernetes-charts.storage.googleapis.com/

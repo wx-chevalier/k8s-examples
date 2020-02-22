@@ -67,15 +67,15 @@
 **作用域：`secret`**
 
 如果 `rabbitmq.enabled`，启动内部 Rabbitmq，`rabbitmq` 配置见 [helm/charts/stable/rabbitmq](https://github.com/helm/charts/tree/master/stable/rabbitmq)，否则使用
-`externalRabbitMq` 配置：
+`rabbitmq` 配置：
 
-| 参数                        | 必须 | 作用域                        |
-| --------------------------- | ---- | ----------------------------- |
-| `rabbitmq.enabled`          |      | `deployment/configmap/secret` |
-| `externalRabbitMq.host`     | true | `configmap`                   |
-| `externalRabbitMq.port`     | true | `configmap`                   |
-| `externalRabbitMq.username` | true | `configmap`                   |
-| `externalRabbitMq.password` | true | `secret`                      |
+| 参数                | 必须 | 作用域                        |
+| ------------------- | ---- | ----------------------------- |
+| `rabbitmq.enabled`  |      | `deployment/configmap/secret` |
+| `rabbitmq.host`     | true | `configmap`                   |
+| `rabbitmq.port`     | true | `configmap`                   |
+| `rabbitmq.username` | true | `configmap`                   |
+| `rabbitmq.password` | true | `secret`                      |
 
 另外 `rabbitmq` 下添加了一些自定义配置：
 

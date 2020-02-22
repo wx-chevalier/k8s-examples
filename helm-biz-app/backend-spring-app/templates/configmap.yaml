@@ -35,18 +35,14 @@ data:
       devtools:
         add-properties: true
 
+      {{- if .Values.rabbitmq.enabled }}
       rabbitmq:
-        {{- if .Values.rabbitmq.enabled }}
-        host: {{ $fullName }}-rabbitmq
-        port: {{ .Values.rabbitmq.service.port | default 5672 }}
-        username: {{ .Values.rabbitmq.rabbitmq.username }}
-        {{- else }}
-        host: {{ .Values.externalRabbitMq.host }}
-        port: {{ .Values.externalRabbitMq.port }}
-        username: {{ .Values.externalRabbitMq.username }}
-        {{- end }}
+        host: {{ .Values.rabbitmq.host }}
+        port: {{ .Values.rabbitmq.port | default 5672 }}
+        username: {{ .Values.rabbitmq.username }}
         virtual-host: {{ .Values.rabbitMqVirtualHost }}
         password: ${RABBITMQ_PASSWORD}
+      {{- end }}
 
     ## Application properties
     application:
