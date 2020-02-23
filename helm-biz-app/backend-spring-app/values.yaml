@@ -18,7 +18,7 @@ applicationConfigMap:
   mountPath: /etc/yourbiz
   extra: |-
     key: value
-# externalConfigMap 的 mountPath 与 applicationYaml 中一致
+# externalConfigMap 的 mountPath 与 applicationConfigMap 中一致
 externalConfigMap:
   enabled: true
   name: config.xml
