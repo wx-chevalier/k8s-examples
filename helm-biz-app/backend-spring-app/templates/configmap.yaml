@@ -79,3 +79,8 @@ data:
         access-token: ${DING_TALK_ACCESS_TOKEN}
 
 {{ .Values.applicationYaml.extra | indent 4 }}
+
+{{- if .Values.externalConfigMap.enabled -}}
+  {{ .Values.externalConfigMap.name }}: |-
+{{ .Values.externalConfigMap.content | indent 4 }}
+{{- end }}
