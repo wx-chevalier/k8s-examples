@@ -99,5 +99,5 @@ data:
 
       ding-talk:
         access-token: ${DING_TALK_ACCESS_TOKEN}
-{{ .Values.applicationConfigMap.extra }}
+{{ .Values.applicationConfigMap.extra | nindent 8 }}
 
