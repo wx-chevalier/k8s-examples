@@ -11,6 +11,12 @@ data:
 {{ .Values.externalConfigMap.content | indent 4 }}
 {{- end }}
 
+
+
+
+
+
+
   application.yaml: |-
     server:
       port: {{ .Values.serverPort }}
