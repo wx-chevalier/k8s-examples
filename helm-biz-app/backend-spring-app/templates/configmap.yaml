@@ -6,11 +6,6 @@ metadata:
   labels:
     {{- include "yourbiz-be.labels" . | nindent 4 }}
 data:
-{{- if .Values.externalConfigMap.enabled -}}
-  {{ .Values.externalConfigMap.name }}: |-
-{{ .Values.externalConfigMap.content | nindent 4 }}
-{{- end }}
-
   application.yaml: |-
     server:
       port: {{ .Values.serverPort }}
@@ -85,3 +80,8 @@ data:
 
 {{ .Values.applicationYaml.extra | nindent 4 }}
 
+
+{{- if .Values.externalConfigMap.enabled -}}
+  {{ .Values.externalConfigMap.name }}: |-
+{{ .Values.externalConfigMap.content | nindent 4 }}
+{{- end }}
