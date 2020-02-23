@@ -8,7 +8,7 @@ metadata:
 data:
   redisson.yaml: |-
     singleServerConfig:
-      address: "{{ .Values.redis.address }}"
+      address: {{ .Values.redis.address }}
       password: {{ .Values.redis.password }}
       idleConnectionTimeout: 10000
       pingTimeout: 1000
