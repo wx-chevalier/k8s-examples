@@ -6,17 +6,6 @@ metadata:
   labels:
     {{- include "yourbiz-be.labels" . | nindent 4 }}
 data:
-{{- if .Values.externalConfigMap.enabled -}}
-  {{ .Values.externalConfigMap.name }}: |-
-{{ .Values.externalConfigMap.content | indent 4 }}
-{{- end }}
-
-
-
-
-
-
-
   application.yaml: |-
     server:
       port: {{ .Values.serverPort }}
