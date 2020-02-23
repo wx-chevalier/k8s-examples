@@ -1,0 +1,12 @@
+{{- if .Values.externalConfigMap.enabled -}}
+{{- $fullName := include "yourbiz-be.fullname" . -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $fullName }}-extra
+  labels:
+    {{- include "yourbiz-be.labels" . | nindent 4 }}
+data:
+  {{ .Values.externalConfigMap.name }}: |-
+{{ .Values.externalConfigMap.content | nindent 4 }}
+{{- end }}
