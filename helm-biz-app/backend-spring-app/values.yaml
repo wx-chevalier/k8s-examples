@@ -43,7 +43,7 @@ secret:
   # jwt:
   #   secret:
 wechat:
-  {}
+  enabled: false
   # token:
   # appId:
   # appSecret:

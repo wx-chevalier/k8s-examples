@@ -93,6 +93,7 @@ spec:
                 secretKeyRef:
                   name: {{ $fullName }}
                   key: oss-access-key-secret
+            {{- if .Values.wechat.enabled }}
             - name: WECHAT_TOKEN
               valueFrom:
                 secretKeyRef:
@@ -103,6 +104,7 @@ spec:
                 secretKeyRef:
                   name: {{ $fullName }}
                   key: wechat-app-secret
+            {{- end }}
           startupProbe:
             httpGet:
               path: /swagger-resources
