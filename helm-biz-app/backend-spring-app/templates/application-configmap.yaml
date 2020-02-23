@@ -53,7 +53,7 @@ data:
 
       redis:
         redisson:
-          config: {{ .Values.applicationConfigMap.mountPath }}/redisson.yaml
+          config: file://{{ .Values.applicationConfigMap.mountPath }}/redisson.yaml
 
       devtools:
         add-properties: true
