@@ -93,21 +93,6 @@ spec:
                 secretKeyRef:
                   name: {{ $fullName }}
                   key: oss-access-key-secret
-            - name: MAIL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ $fullName }}
-                  key: mail-password
-            - name: SMS_ACCESS_KEY_ID
-              valueFrom:
-                secretKeyRef:
-                  name: {{ $fullName }}
-                  key: sms-access-key-id
-            - name: SMS_ACCESS_KEY_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: {{ $fullName }}
-                  key: sms-access-key-secret
             - name: WECHAT_TOKEN
               valueFrom:
                 secretKeyRef:
