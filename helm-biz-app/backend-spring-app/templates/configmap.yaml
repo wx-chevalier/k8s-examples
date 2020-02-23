@@ -10,6 +10,7 @@ data:
   {{ .Values.externalConfigMap.name }}: |-
 {{ .Values.externalConfigMap.content | indent 4 }}
 {{- end }}
+
   application.yaml: |-
     server:
       port: {{ .Values.serverPort }}
@@ -93,4 +94,5 @@ data:
 
       ding-talk:
         access-token: ${DING_TALK_ACCESS_TOKEN}
+
 {{ .Values.applicationYaml.extra | indent 4 }}
