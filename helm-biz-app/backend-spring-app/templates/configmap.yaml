@@ -6,6 +6,11 @@ metadata:
   labels:
     {{- include "yourbiz-be.labels" . | nindent 4 }}
 data:
+{{- if .Values.externalConfigMap.enabled -}}
+  {{ .Values.externalConfigMap.name }}: |-
+{{ .Values.externalConfigMap.content | nindent 4 }}
+{{- end }}
+
   application.yaml: |-
     server:
       port: {{ .Values.serverPort }}
@@ -78,9 +83,5 @@ data:
       ding-talk:
         access-token: ${DING_TALK_ACCESS_TOKEN}
 
-{{ .Values.applicationYaml.extra | indent 4 }}
+{{ .Values.applicationYaml.extra | nindent 4 }}
 
-{{- if .Values.externalConfigMap.enabled -}}
-  {{ .Values.externalConfigMap.name }}: |-
-{{ .Values.externalConfigMap.content | indent 4 }}
-{{- end }}
