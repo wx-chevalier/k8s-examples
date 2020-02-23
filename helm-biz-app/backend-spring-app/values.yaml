@@ -12,13 +12,18 @@ fullnameOverride: ""
 serverPort: 80
 serverTimezone: Asia/Shanghai
 jarFile: biz-api.jar
-## 额外的 ConfigMap
-configMap:
+
+## application.yaml 以及额外的 ConfigMap
+applicationYaml:
   mountPath: /etc/yourbiz
-  externalEnabled: true
+  extra: ""
+externalConfigMap:
+  enabled: true
+  mountPath: /etc/yourbiz
   name: config.xml
   content: |-
     key: value
+
 localFileStore:
   enabled: true
   savePath: /yourbiz/files
@@ -57,7 +62,6 @@ dingTalk:
 msg:
   deviceCodeBlackListPattern:
   deviceCodeWhiteListPattern:
-rabbitMqVirtualHost: /dev
 
 ## MySQL 配置
 mysql:
@@ -71,7 +75,7 @@ externalMySql: {}
 ## RabbitMQ 配置
 rabbitmq:
   enabled: false
-
+  virtualHost: /dev
   ## permission issue
   securityContext:
     enabled: true

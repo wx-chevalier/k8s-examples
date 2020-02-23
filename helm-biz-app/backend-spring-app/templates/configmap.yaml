@@ -6,9 +6,9 @@ metadata:
   labels:
     {{- include "yourbiz-be.labels" . | nindent 4 }}
 data:
-{{- if .Values.configMap.externalEnabled -}}
-  {{ .Values.configMap.name }}: |-
-    {{ .Values.configMap.content }}
+{{- if .Values.externalConfigMap.enabled -}}
+  {{ .Values.externalConfigMap.name }}: |-
+    {{ .Values.externalConfigMap.content }}
 {{- end }}
   application.yaml: |-
     server:
@@ -40,7 +40,7 @@ data:
         host: {{ .Values.rabbitmq.host }}
         port: {{ .Values.rabbitmq.port | default 5672 }}
         username: {{ .Values.rabbitmq.username }}
-        virtual-host: {{ .Values.rabbitMqVirtualHost }}
+        virtual-host: {{ .Values.rabbitmq.virtualHost }}
         password: ${RABBITMQ_PASSWORD}
       {{- end }}
 
@@ -93,3 +93,4 @@ data:
 
       ding-talk:
         access-token: ${DING_TALK_ACCESS_TOKEN}
+{{ .Values.applicationYaml.extra | indent 4 }}
