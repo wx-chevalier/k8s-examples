@@ -27,6 +27,9 @@ data:
         {{- if .Values.mysql.enabled }}
         url: jdbc:mysql://{{ $fullName }}-mysql:{{ .Values.mysql.service.port | default 3306 }}/{{ .Values.mysql.dbname }}{{- if .Values.mysql.extralJdbcArgs }}{{- printf "?%s" .Values.mysql.extralJdbcArgs -}}{{- end }}
         username: {{ .Values.mysql.username }}
+        {{- else }}
+        url: {{ .Values.externalMySql.url }}
+        username: {{ .Values.externalMySql.username }}
         {{- end }}
         password: ${MYSQL_PASSWORD}
 
@@ -58,12 +61,6 @@ data:
         allowedMethods: ['*']
         allowedHeaders: ['*']
 
-      mail:
-        host: {{ .Values.mail.host }}
-        port: {{ .Values.mail.port }}
-        username: {{ .Values.mail.username }}
-        password: ${MAIL_PASSWORD}
-
       oss:
         access-key-id: ${OSS_ACCESS_KEY_ID}
         access-key-secret: ${OSS_ACCESS_KEY_SECRET}
@@ -72,12 +69,6 @@ data:
         expiration: {{ .Values.oss.expiration }}
         max-size: {{ .Values.oss.maxSize }}
         callback-url: {{ .Values.oss.callbackUrl }}
-
-      sms:
-        region-id: {{ .Values.sms.regionId }}
-        sign-name: {{ .Values.sms.signName }}
-        access-key-id: ${SMS_ACCESS_KEY_ID}
-        access-key-secret: ${SMS_ACCESS_KEY_SECRET}
 
       time-series:
         max-ts-intervals: 700

@@ -38,16 +38,6 @@ oss:
   expiration: 900
   maxSize: 17179869184
   callbackUrl: https://api.yourdomain.com/callback/oss
-mail:
-  port: 465
-  host: smtp.exmail.qq.com
-  username: notice@yourdomain.com
-  # password:
-sms:
-  regionId: cn-hangzhou
-  signName: yourbiz-sign
-  # accessKeyId:
-  # accessKeySecret:
 secret:
   {}
   # jwt:
@@ -60,9 +50,6 @@ wechat:
 dingTalk:
   {}
   # accessToken:
-msg:
-  deviceCodeBlackListPattern:
-  deviceCodeWhiteListPattern:
 
 ## MySQL 配置
 mysql:
