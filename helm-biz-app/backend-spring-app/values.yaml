@@ -16,7 +16,8 @@ jarFile: biz-api.jar
 ## application.yaml 以及额外的 ConfigMap
 applicationYaml:
   mountPath: /etc/yourbiz
-  extra: ""
+  extra: |-
+    key: value
 # externalConfigMap 的 mountPath 与 applicationYaml 中一致
 externalConfigMap:
   enabled: true
