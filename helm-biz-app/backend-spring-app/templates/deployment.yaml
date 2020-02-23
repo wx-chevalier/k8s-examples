@@ -27,7 +27,7 @@ spec:
         - name: check-mysql-ready
           image: {{ .Values.mysql.image | default "mysql" }}:{{ .Values.mysql.imageTag | default "8" }}
           command: ['sh', '-c',
-          'until mysqladmin --connect-timeout 2 ping -h{{ $fullName }}-mysql -P{{ .Values.mysql.service.port | default 3306 }} -u{{ .Values.mysql.mysqlUser }} -p$MYSQL_PASSWORD | grep "mysqld is alive"; do echo waiting for mysql; sleep 2; done;']
+          'until mysqladmin --connect-timeout 2 ping -h{{ $fullName }}-mysql -P{{ .Values.mysql.service.port | default 3306 }} -u{{ .Values.mysql.username }} -p$MYSQL_PASSWORD | grep "mysqld is alive"; do echo waiting for mysql; sleep 2; done;']
           env:
             - name: MYSQL_PASSWORD
               valueFrom:

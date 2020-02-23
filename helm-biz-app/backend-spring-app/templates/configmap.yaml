@@ -25,11 +25,8 @@ data:
       datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
         {{- if .Values.mysql.enabled }}
-        url: jdbc:mysql://{{ $fullName }}-mysql:{{ .Values.mysql.service.port | default 3306 }}/{{ .Values.mysql.mysqlDatabase }}{{- if .Values.mysql.extralJdbcArgs }}{{- printf "?%s" .Values.mysql.extralJdbcArgs -}}{{- end }}
-        username: {{ .Values.mysql.mysqlUser }}
-        {{- else }}
-        url: {{ .Values.externalMySql.url }}
-        username: {{ .Values.externalMySql.username }}
+        url: jdbc:mysql://{{ $fullName }}-mysql:{{ .Values.mysql.service.port | default 3306 }}/{{ .Values.mysql.dbname }}{{- if .Values.mysql.extralJdbcArgs }}{{- printf "?%s" .Values.mysql.extralJdbcArgs -}}{{- end }}
+        username: {{ .Values.mysql.username }}
         {{- end }}
         password: ${MYSQL_PASSWORD}
 
