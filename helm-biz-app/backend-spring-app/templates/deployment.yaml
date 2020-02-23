@@ -59,11 +59,6 @@ spec:
             - name: app-conf
               mountPath: {{ .Values.applicationYaml.mountPath }}
               readOnly: true
-            {{- if .Values.externalConfigMap.enabled }}
-            - name: app-external-conf
-              mountPath: {{ .Values.externalConfigMap.mountPath }}
-              readOnly: true
-            {{- end }}
             - name: yourbiz-local-file-storage
               mountPath: {{ .Values.localFileStore.savePath }}
           env:

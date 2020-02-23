@@ -8,7 +8,7 @@ metadata:
 data:
 {{- if .Values.externalConfigMap.enabled -}}
   {{ .Values.externalConfigMap.name }}: |-
-    {{ .Values.externalConfigMap.content }}
+{{ .Values.externalConfigMap.content | indent 4 }}
 {{- end }}
   application.yaml: |-
     server:
