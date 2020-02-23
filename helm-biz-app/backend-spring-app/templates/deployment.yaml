@@ -47,7 +47,7 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["java"]
-          args: ["-Duser.timezone={{ .Values.serverTimezone }}", "-jar", {{ .Values.jarFile }}, "--spring.config.location={{ .Values.applicationConfigMap.mountPath }}/application.yaml"]
+          args: ["-Duser.timezone={{ .Values.serverTimezone }}", "-jar", {{ .Values.jarFile }}]
           ports:
             - name: http
               # see secret.yaml server.port
