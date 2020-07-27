@@ -37,8 +37,8 @@ Common labels
 {{- define "yourbiz-static.labels" -}}
 helm.sh/chart: {{ include "yourbiz-static.chart" . }}
 {{ include "yourbiz-static.selectorLabels" . }}
-{{- if .Chart.CaddyVersion }}
-app.kubernetes.io/version: {{ .Chart.CaddyVersion | quote }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
