@@ -19,6 +19,21 @@ sharedVolumeMounts:
   - name: shared-data
     mountPath: /srv
 
+ingress:
+  enabled: true
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-staging-cluster"
+  hosts:
+    - host: echo1.test.unionfab.com
+      paths:
+        - /
+  tls:
+    - secretName: echo1.test.unionfab.com
+      hosts:
+        - echo1.test.unionfab.com
+
 customCaddyfile:
   enabled: false
   content:
@@ -40,18 +55,3 @@ customCaddyfile:
         # keep referrer data off of HTTP connections
         Referrer-Policy no-referrer-when-downgrade
       }
-
-ingress:
-  enabled: true
-  annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: "0"
-    kubernetes.io/ingress.class: "nginx"
-    cert-manager.io/cluster-issuer: "letsencrypt-staging-cluster"
-  hosts:
-    - host: echo1.test.yourdomain.com
-      paths:
-        - /
-  tls:
-    - secretName: echo1.test.yourdomain.com
-      hosts:
-        - echo1.test.yourdomain.com
