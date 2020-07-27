@@ -12,12 +12,34 @@ initContainers:
     args:
       - "-c"
       - >
-          date >> /pod-data/index.html;
-          echo Hello world from init container >> /pod-data/index.html;
+        date >> /pod-data/index.html;
+        echo Hello world from init container >> /pod-data/index.html;
 
 sharedVolumeMounts:
   - name: shared-data
     mountPath: /srv
+
+customCaddyfile:
+  enabled: false
+  content:
+    - >
+      0.0.0.0
+      browse
+      log stdout
+      errors stdout
+      header {
+        # enable HSTS
+        Strict-Transport-Security max-age=31536000;
+
+        # disable clients from sniffing the media type
+        X-Content-Type-Options nosniff
+        
+        # clickjacking protection
+        X-Frame-Options DENY
+
+        # keep referrer data off of HTTP connections
+        Referrer-Policy no-referrer-when-downgrade
+      }
 
 ingress:
   enabled: true
