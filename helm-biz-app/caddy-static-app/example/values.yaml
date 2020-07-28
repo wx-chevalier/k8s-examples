@@ -36,7 +36,7 @@ ingress:
 
 customCaddyfile:
   enabled: false
-  content: |-
+  content: |
     0.0.0.0
     browse
     log stdout
