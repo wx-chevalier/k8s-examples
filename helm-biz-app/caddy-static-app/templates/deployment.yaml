@@ -34,12 +34,12 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 2015
+              containerPort: 80
               protocol: TCP
           volumeMounts:
             {{- if .Values.customCaddyfile.enabled }}
             - name: caddyfile
-              mountPath: "/etc/Caddyfile"
+              mountPath: "/etc/caddy/Caddyfile"
               subPath: "Caddyfile"
               readOnly: true
             {{- end }}
