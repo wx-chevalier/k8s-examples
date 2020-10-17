@@ -7,6 +7,6 @@ metadata:
   labels:
     {{- include "yourbiz-be.labels" . | nindent 4 }}
 data:
-  {{ .Values.biz.configMap.name }}: >
+  {{ .Values.biz.configMap.name }}: |-
     {{ .Values.biz.configMap.content }}
 {{- end }}
