@@ -8,5 +8,5 @@ metadata:
     {{- include "yourbiz-be.labels" . | nindent 4 }}
 data:
   {{ .Values.biz.configMap.name }}: |-
-    {{ .Values.biz.configMap.content }}
+    {{ .Values.biz.configMap.content | nindent 4 }}
 {{- end }}
