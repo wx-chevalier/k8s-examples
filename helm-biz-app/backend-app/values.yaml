@@ -11,8 +11,8 @@ biz:
   # cmd: ["npm start"]
   env:
     ENV_VAR: value
-  envSecrets:
-    SECRET_VAR: k8s-secret-name
+  # envSecrets:
+  #   SECRET_VAR: k8s-secret-name
   localFileStore:
     enabled: true
     savePath: /yourbiz/files
