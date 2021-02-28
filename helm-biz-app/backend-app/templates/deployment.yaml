@@ -25,6 +25,20 @@ spec:
 
       containers:
         - name: {{ $fullName }}
+          {{- if or $.Values.biz.env $.Values.biz.envSecrets }}
+          env:
+            {{- range $key, $value := $.Values.biz.env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+            {{- range $key, $secret := $.Values.biz.envSecrets }}
+            - name: {{ $key }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $secret }}
+                  key: {{ $key | quote }}
+            {{- end }}
+          {{- end }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
@@ -55,6 +69,7 @@ spec:
               port: http
             failureThreshold: 30
             periodSeconds: 10
+
       volumes:
         {{- if .Values.biz.configMap.enabled }}
         - name: app-conf
