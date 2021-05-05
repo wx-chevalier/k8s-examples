@@ -3,7 +3,7 @@ fullnameOverride: ""
 replicaCount: 1
 
 image:
-  repository: registry.yourdomain.com/yourbiz/yourbiz-api
+  name: registry.yourdomain.com/yourbiz/yourbiz-api:latest
   pullPolicy: Always
 imagePullSecrets: []
 
