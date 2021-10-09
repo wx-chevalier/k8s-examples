@@ -54,13 +54,13 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}      
-      {{- if .Values.customCaddyfile.enabled }}
       volumes:
         {{- toYaml .Values.sharedVolumes | nindent 8 }}
+        {{- if .Values.customCaddyfile.enabled }}
         - name: caddyfile
           configMap:
             name: {{ $fullName }}
-      {{- end }}
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
