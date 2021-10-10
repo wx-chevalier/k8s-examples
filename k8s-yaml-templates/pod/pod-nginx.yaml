@@ -1,0 +1,12 @@
+# https://kubernetes.io/docs/tutorials/k8s101/
+# https://cheatsheet.dennyzhang.com/kubernetes-yaml-templates
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.7.9
+    ports:
+    - containerPort: 80
