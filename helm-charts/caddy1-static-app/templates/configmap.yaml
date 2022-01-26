@@ -1,0 +1,11 @@
+{{- if .Values.customCaddyfile.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "ufc-static.fullname" . }}
+  labels:
+    {{- include "ufc-static.labels" . | nindent 4 }}
+data:
+  Caddyfile: |
+    {{ .Values.customCaddyfile.content | nindent 4 }}
+{{- end }}
