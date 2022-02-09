@@ -8,7 +8,6 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-## @start yourbiz be 配置
 serverPort: 80
 serverTimezone: Asia/Shanghai
 jarFile: biz-api.jar

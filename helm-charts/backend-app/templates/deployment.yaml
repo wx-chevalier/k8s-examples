@@ -48,7 +48,6 @@ spec:
           {{- end }}
           ports:
             - name: http
-              # see secret.yaml server.port
               containerPort: {{ .Values.biz.serverPort }}
               protocol: TCP
           resources:
